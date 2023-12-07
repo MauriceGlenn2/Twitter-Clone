@@ -16,7 +16,7 @@ export default function SideBar() {
     return (
       <div className="h-full hidden sm:flex flex-col fixed xl:ml-24">
         <nav className="h-full relative xl:space-y-1.5">
-          <div className="flex justify-center items-center xl:justify-start py-3 xl:p-3">
+          <div className="flex justify-center items-center xl:justify-start py-8 xl:p-3">
             <Image src={"/assets/twitter-logo.webp"} width={34} height={34} />
           </div>
           <SideBarLink text={"Home"} Icon={HomeIcon} />
@@ -35,7 +35,7 @@ export default function SideBar() {
 
 function SideBarLink({text, Icon}) {
     return (
-      <li className="hoverAnimation flex mb-6 xl:justify-start justify-center text-xl space-x-3 xl:p-3">
+      <li className="hoverAnimation flex mb-3 xl:justify-start  justify-center text-xl space-x-3 xl:p-3kl">
         <Icon className="h-7" />
         <span className="hidden xl:inline">{text}</span>
       </li>

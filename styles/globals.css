@@ -2,7 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+.hoverAnimation{
+    @apply  p-3 xl:p-3 rounded-full cursor-pointer xl:w-auto xl:h-auto 
+}
+
 .hoverAnimation:hover{
-    @apply  bg-white hover:bg-opacity-10 xl:p-3 rounded-full hover:cursor-pointer
-    w-11 h-11 xl:w-auto xl:h-auto
+  @apply bg-opacity-10 cursor-pointer  bg-white
+}
+
+.iconsAnimation:hover{
+  @apply   bg-[#1d9bf0] bg-opacity-10 cursor-pointer
+}
+
+.iconsAnimation{
+    @apply rounded-full w-8 h-8 flex items-center 
 }

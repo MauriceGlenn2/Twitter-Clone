@@ -1,3 +1,4 @@
+import Tweet from "./Tweet";
 import TweetInput from "./TweetInput";
 
 export default function PostFeed() {
@@ -7,6 +8,7 @@ export default function PostFeed() {
                 Home
             </div>
             <TweetInput />
+            <Tweet />
         </div>
     )
 }
