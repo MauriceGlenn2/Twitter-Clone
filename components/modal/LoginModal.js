@@ -1,4 +1,9 @@
-import { closeSignupModal, openSignupModal } from "@/redux/modalSlice";
+import {
+  closeLoginModal,
+  closeSignupModal,
+  openLoginModal,
+  openSignupModal,
+} from "@/redux/modalSlice";
 import Modal from "@mui/material/Modal";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -10,7 +15,7 @@ export default function LoginModal() {
   return (
     <>
       <button
-        onClick={() => dispatch(open())}
+        onClick={() => dispatch(openLoginModal())}
         className="bg-transparent border font-bold border-white text-white w-[160px] rounded-full h-[40px] hover:bg-[#cbd2d7]"
       >
         Log in
@@ -18,7 +23,7 @@ export default function LoginModal() {
 
       <Modal
         open={isOpen}
-        onClose={() => dispatch(closeSignupModal())}
+        onClose={() => dispatch(closeLoginModal())}
         className="flex justify-center items-center"
       >
         <div
@@ -28,18 +33,9 @@ export default function LoginModal() {
          flex justify-center"
         >
           <div className="w-[90%] mt-8 flex flex-col">
-            <button className="bg-white rounded-md text-black w-full font-bold text-lg p-2">
-              Sign in as guest
-            </button>
-            <h1 className="text-center mt-4 font-bold text-lg">Or</h1>
             <h1 className="text-center mt-4 font-bold text-4xl">
-              Create your account
+              Sign in to your account
             </h1>
-            <input
-              placeholder="Full Name"
-              className="h-10 rounded-md mt-8 bg-transparent border border-gray-700 p-6"
-              type={"name"}
-            />
             <input
               placeholder="Email"
               className="h-10 rounded-md mt-8 bg-transparent border border-gray-700 p-6"
@@ -51,7 +47,11 @@ export default function LoginModal() {
               type={"password"}
             />
             <button className="bg-white mt-8 rounded-md text-black w-full font-bold text-lg p-2">
-              Create account
+              Sign in
+            </button>
+            <h1 className="text-center mt-8 font-bold text-lg ">Or</h1>
+            <button className="bg-white rounded-md text-black w-full font-bold text-lg p-2 mt-8">
+              Sign in as guest
             </button>
           </div>
         </div>
