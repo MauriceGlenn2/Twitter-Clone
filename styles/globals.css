@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+  background-color: black;
+}
+
 .hoverAnimation{
     @apply  p-3 xl:p-3 rounded-full cursor-pointer xl:w-auto xl:h-auto 
 }

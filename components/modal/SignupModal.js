@@ -4,11 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { auth } from "@/firebase";
 import { setUser } from "@/redux/userSlice";
-import { current } from "@reduxjs/toolkit";
+import { useRouter } from "next/router";
 
 export default function SignUpModal() {
   const isOpen = useSelector((state) => state.modals.signupModalOpen);
@@ -16,12 +18,31 @@ export default function SignUpModal() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
+
+  const router = useRouter();
 
   async function handleSignup() {
     const userCredentials = await createUserWithEmailAndPassword(
       auth,
       email,
       password
+    );
+
+    //update profile 2 arguments, user and object with displayName and photoURL
+    await updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: `./assets/pp${Math.ceil(Math.random() * 6)}.avif`,
+    })
+
+      router.reload();
+  }
+
+  async function handleGuestSignIn(email, password) {
+    await signInWithEmailAndPassword(
+      auth,
+      "guest11223344@moemail.com",
+      "1234567"
     );
   }
 
@@ -35,10 +56,10 @@ export default function SignUpModal() {
       dispatch(
         setUser({
           username: currentUser.email.split("@")[0], //username is everything before @
-          name: null,
+          name: currentUser.displayName,
           email: currentUser.email,
           uid: currentUser.uid,
-          photoUrl: null,
+          photoUrl: currentUser.photoURL,
         })
       );
     });
@@ -67,7 +88,8 @@ export default function SignUpModal() {
          flex justify-center"
         >
           <div className="w-[90%] mt-8 flex flex-col">
-            <button className="bg-white rounded-md text-black w-full font-bold text-lg p-2">
+            <button onClick={handleGuestSignIn}
+            className="bg-white rounded-md text-black w-full font-bold text-lg p-2">
               Sign in as guest
             </button>
             <h1 className="text-center mt-4 font-bold text-lg">Or</h1>
@@ -78,6 +100,7 @@ export default function SignUpModal() {
               placeholder="Full Name"
               className="h-10 rounded-md mt-8 bg-transparent border border-gray-700 p-6"
               type={"name"}
+              onChange={(e) => setName(e.target.value)}
             />
             <input
               placeholder="Email"

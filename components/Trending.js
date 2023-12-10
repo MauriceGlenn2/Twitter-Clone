@@ -4,7 +4,6 @@ import { BadgeCheckIcon } from "@heroicons/react/solid";
 export default function Trending() {
   return (
     <div className="hidden lg:flex flex-col ml-7 mt-4">
-
       <div className="flex space-x-3 bg-white bg-opacity-10 w-[300px] h-[44px] p-3 rounded-3xl">
         <SearchIcon className="w-6 text-gray-600" />
         <input
@@ -16,28 +15,35 @@ export default function Trending() {
         <h1 className="font-bold text-xl p-3">Whats happening</h1>
         <div className="relative p-3">
           <DotsHorizontalIcon className="w-5 text-gray-600 absolute right-4" />
-          <p className="text-xs text-gray-500">Trendiing in US</p>
+          <p className="text-xs text-gray-500">Sports Trending</p>
+          <h1 className="text-[15px] font-bold">CJ. Stroud</h1>
+          <p className="text-xs text-gray-500">1,000 Tweets</p>
+        </div>
+        <div className="relative p-3">
+          <DotsHorizontalIcon className="w-5 text-gray-600 absolute right-4" />
+          <p className="text-xs text-gray-500">Sports Trending</p>
+          <h1 className="text-[15px] font-bold">Bryce Young</h1>
+          <p className="text-xs text-gray-500">1,000 Tweets</p>
+        </div>
+        <div className="relative p-3">
+          <DotsHorizontalIcon className="w-5 text-gray-600 absolute right-4" />
+          <p className="text-xs text-gray-500">Sports Trending</p>
+          <h1 className="text-[15px] font-bold">Cowboys at Eagles</h1>
+          <p className="text-xs text-gray-500">1,000,000 Tweets</p>
+        </div>
+        <div className="relative p-3">
+          <DotsHorizontalIcon className="w-5 text-gray-600 absolute right-4" />
+          <p className="text-xs text-gray-500">Trending in US</p>
           <h1 className="text-[15px] font-bold">China</h1>
           <p className="text-xs text-gray-500">1,000 Tweets</p>
         </div>
         <div className="relative p-3">
           <DotsHorizontalIcon className="w-5 text-gray-600 absolute right-4" />
-          <p className="text-xs text-gray-500">Trendiing in US</p>
+          <p className="text-xs text-gray-500">Trending in US</p>
           <h1 className="text-[15px] font-bold">China</h1>
           <p className="text-xs text-gray-500">1,000 Tweets</p>
         </div>
-        <div className="relative p-3">
-          <DotsHorizontalIcon className="w-5 text-gray-600 absolute right-4" />
-          <p className="text-xs text-gray-500">Trendiing in US</p>
-          <h1 className="text-[15px] font-bold">China</h1>
-          <p className="text-xs text-gray-500">1,000 Tweets</p>
-        </div>
-        <div className="relative p-3">
-          <DotsHorizontalIcon className="w-5 text-gray-600 absolute right-4" />
-          <p className="text-xs text-gray-500">Trendiing in US</p>
-          <h1 className="text-[15px] font-bold">China</h1>
-          <p className="text-xs text-gray-500">1,000 Tweets</p>
-        </div>
+        
       </div>
       <div className="w-[300px] h-[300px] bg-white bg-opacity-10 rounded-3xl mt-3 text-white">
         <h1 className="font-bold text-xl p-3">Who to Follow</h1>

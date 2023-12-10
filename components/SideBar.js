@@ -1,18 +1,34 @@
+import { auth } from "@/firebase";
+import { signOutUser } from "@/redux/userSlice";
 import {
   HomeIcon,
   HashtagIcon,
   InboxIcon,
   BellIcon,
-  UserAddIcon,
   DotsCircleHorizontalIcon,
-  ClipboardListIcon,
   BookmarkIcon,
   UserIcon,
   DotsHorizontalIcon,
 } from "@heroicons/react/outline";
 import Image from "next/image";
+import { useDispatch, useSelector } from "react-redux";
+import { signOut } from "firebase/auth";
+import { closeLoginModal, closeSignupModal } from "@/redux/modalSlice";
 
 export default function SideBar() {
+  const dispatch = useDispatch();
+  //sets username and 
+  const user = useSelector(state => state.user)
+  
+  //sign out funtion
+  async function handleSignOut() {
+    await signOut(auth);
+    dispatch(signOutUser());
+    dispatch(closeSignupModal());
+    dispatch(closeLoginModal());
+
+  }
+
   return (
     <div className="h-full hidden sm:flex flex-col fixed xl:ml-24">
       <nav className="h-full relative xl:space-y-1.5">
@@ -30,6 +46,7 @@ export default function SideBar() {
           Tweet
         </button>
         <div
+          onClick={handleSignOut}
           className="
           bottom-0
           hover:bg-white hover:bg-opacity-10 rounded-full cursor-pointer
@@ -37,11 +54,12 @@ export default function SideBar() {
         >
           <img
             className="h-10 w-10 rounded-full object-cover"
-            src="/assets/Me pic.jpeg"
+            src={user.photoUrl || "/assets/twitter-logo.webp"}
           />
           <div className="hidden xl:inline">
-            <h1 className="font-bold whitespace-nowrap">Name</h1>
-            <h1 className="text-gray-500">@Username</h1>
+            {/* set from  const user = useSelector(state => state.user)*/}
+            <h1 className="font-bold whitespace-nowrap">{user.name}</h1>
+            <h1 className="text-gray-500">@{user.username}</h1>
           </div>
           <DotsHorizontalIcon className="h-5 hidden xl:inline" />
         </div>
