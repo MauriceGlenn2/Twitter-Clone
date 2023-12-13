@@ -1,3 +1,4 @@
+import { openCommentModal } from "@/redux/modalSlice";
 import {
   ChartBarIcon,
   ChatIcon,
@@ -5,8 +6,10 @@ import {
   UploadIcon,
 } from "@heroicons/react/outline";
 import Moment from "react-moment";
+import { useDispatch } from "react-redux";
 
 export default function Tweet({ data }) {
+  const dispatch = useDispatch();
   return (
     <div className="border-b border-gray-700">
       <TweetHeader
@@ -17,7 +20,9 @@ export default function Tweet({ data }) {
         photoUrl={data?.photoUrl}
       />
       <div className="p-3 ml-16 text-gray-500 flex space-x-12">
-        <ChatIcon className="w-5 cursor-pointer hover:text-green-400" />
+        <div onClick={() => dispatch(openCommentModal())}>
+          <ChatIcon className="w-5 cursor-pointer hover:text-green-400" />
+        </div>
         <HeartIcon className="w-5 cursor-pointer hover:text-pink-500" />
         <ChartBarIcon className="w-5 cursor-not-allowed" />
         <UploadIcon className="w-5 cursor-not-allowed" />
@@ -35,9 +40,7 @@ export function TweetHeader({ username, name, timestamp, text, photoUrl }) {
           <h1 className="text-bold text-white">{name}</h1>
           <span>@{username}</span>
           <div className="w-1 h-1 bg-gray-500 rounded-full"></div>
-          <Moment fromNow>
-             {timestamp}
-          </Moment>
+          <Moment fromNow>{timestamp}</Moment>
         </div>
 
         <span>{text}</span>
