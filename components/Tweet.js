@@ -4,12 +4,14 @@ import {
   ChartBarIcon,
   ChatIcon,
   HeartIcon,
+  TrashIcon,
   UploadIcon,
 } from "@heroicons/react/outline";
 import { HeartIcon as FilledHeartIcon } from "@heroicons/react/solid";
 import {
   arrayRemove,
   arrayUnion,
+  deleteDoc,
   doc,
   onSnapshot,
   updateDoc,
@@ -26,6 +28,11 @@ export default function Tweet({ data, id }) {
   const user = useSelector((state) => state.user);
   const [likes, setLikes] = useState([]);
   const [comments, setComments] = useState([]);
+
+  async function deleteTweet(e) {
+    e.stopPropagation();
+    await deleteDoc(doc(db, "posts", id));
+  }
 
   async function likeComment(e) {
     e.stopPropagation();
@@ -49,8 +56,8 @@ export default function Tweet({ data, id }) {
     if (!id) return;
 
     const unsubscribe = onSnapshot(doc(db, "posts", id), (doc) => {
-      setLikes(doc.data().likes);
-      setComments(doc.data().comments);
+      setLikes(doc.data()?.likes);
+      setComments(doc.data()?.comments);
     });
     return () => unsubscribe();
   }, []);
@@ -66,6 +73,7 @@ export default function Tweet({ data, id }) {
         timestamp={data?.timestamp?.toDate()}
         text={data?.tweet}
         photoUrl={data?.photoUrl}
+        image={data?.image}
       />
       <div className="p-3 ml-16 text-gray-500 flex space-x-12">
         <div
@@ -102,6 +110,12 @@ export default function Tweet({ data, id }) {
           )}
           {likes.length > 0 && <span>{likes.length}</span>}
         </div>
+        {user.uid === data?.uid && (
+        <div className="cursor-pointer hover:text-red-600"
+        onClick={deleteTweet}
+        >
+          <TrashIcon className="w-5"/>
+        </div>)}
         <ChartBarIcon className="w-5 cursor-not-allowed" />
         <UploadIcon className="w-5 cursor-not-allowed" />
       </div>
@@ -109,7 +123,7 @@ export default function Tweet({ data, id }) {
   );
 }
 
-export function TweetHeader({ username, name, timestamp, text, photoUrl }) {
+export function TweetHeader({ username, name, timestamp, text, photoUrl, image }) {
   return (
     <div className="flex space-x-3 p-3  border-gray-700">
       <img className="h-11 w-11 rounded-full object-cover" src={photoUrl} />
@@ -122,9 +136,11 @@ export function TweetHeader({ username, name, timestamp, text, photoUrl }) {
         </div>
 
         <span>{text}</span>
+        {image && <img
+        className="object-cover rounded-md mt-3 max-h-80 border border-gray-700"
+        src={image}/>}
       </div>
     </div>
   );
 }
 
-//3:17
