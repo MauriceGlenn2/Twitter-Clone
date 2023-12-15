@@ -3,6 +3,7 @@ import Tweet from "./Tweet";
 import TweetInput from "./TweetInput";
 import { useEffect, useState } from "react";
 import { db } from "@/firebase";
+import Link from "next/link";
 
 export default function PostFeed() {
   const [tweets, setTweets] = useState([]);
@@ -23,7 +24,13 @@ export default function PostFeed() {
       <TweetInput />
       {
         tweets.map((tweet => {
-            return <Tweet key={tweet.id} data={tweet.data()} /> 
+         
+            return (
+            
+                <Tweet key={tweet.id} id={tweet.id} data={tweet.data()} />
+           
+            );
+            
         }))
       }
       <Tweet />

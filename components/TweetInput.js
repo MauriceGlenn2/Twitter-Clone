@@ -32,7 +32,7 @@ export default function TweetInput() {
     <div className="flex space-x-3 p-3 border-b border-gray-700">
       <img
         className="h-11 w-11 rounded-full object-cover"
-        src="/assets/me pic.jpeg"
+        src={user.photoUrl || "/assets/twitter-logo.webp"}
       />
       <div className="w-full">
         <textarea
